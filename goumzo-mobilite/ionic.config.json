@@ -1,0 +1,7 @@
+{
+  "name": "GoumzoMobilité",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
