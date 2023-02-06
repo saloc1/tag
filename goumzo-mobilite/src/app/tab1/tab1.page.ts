@@ -7,7 +7,9 @@ interface ApiResponse {
     type: string;
     properties: {
       LIBELLE: string;
-      
+    };
+    geometry: {
+      coordinates: Array<number>;
     };
   }>;
 }
@@ -18,6 +20,7 @@ interface ApiResponse {
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  coordinates: number[][] = [];
   constructor(private http: HttpClient) {}
   public results: string[] = [];
   public StartResults: string[] = [];
@@ -34,6 +37,7 @@ export class Tab1Page {
 
       this.http.get<ApiResponse>(apiUrl).subscribe(data => {
         this.results = Array.from(new Set(data.features.map(feature => feature.properties.LIBELLE)));
+        this.coordinates = data.features.map(feature => feature.geometry.coordinates);
       });
     } else {
       this.results = [];
@@ -66,6 +70,7 @@ export class Tab1Page {
   debug() {
     console.log('startPoint: ', this.startPoint);
     console.log('endPoint: ', this.endPoint);
+    console.log('coordinates: ', this.coordinates);
     }
 }
 
