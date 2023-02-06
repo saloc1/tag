@@ -19,7 +19,12 @@ interface ApiResponse {
 export class Tab1Page {
   constructor(private http: HttpClient) {}
   public results: string[] = [];
+  public StartResults: string[] = [];
   public selectedResult: string = '';
+  public endPoint: string = '';
+  public startPoint: string = '';
+  public showSearchList: boolean = true;
+  public showStartList: boolean = true;
 
   handleChange(event: any) {
     if (event.target.value !== "") {
@@ -31,7 +36,30 @@ export class Tab1Page {
       });
     } else {
       this.results = [];
+      this.showSearchList = true;
     }
+  }
+
+  handleChangeStart(event: any) {
+    if (event.target.value !== "") {
+      const query = encodeURIComponent(event.target.value);
+      const apiUrl = `https://data.mobilites-m.fr/api/findType/json?types=arret&query=${query}`;
+
+      this.http.get<ApiResponse>(apiUrl).subscribe(data => {
+        this.StartResults = Array.from(new Set(data.features.map(feature => feature.properties.LIBELLE)));
+      });
+    } else {
+      this.StartResults = [];
+      this.showStartList = true;
+    }
+  }
+
+  selectResult(result: string) {
+    this.selectedResult = result;
+  }
+
+  selectStartResult(result: string) {
+    this.selectedResult = result;
   }
 }
 
