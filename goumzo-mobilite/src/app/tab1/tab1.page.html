@@ -7,16 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)" show-clear-button="always" value="" animated="true" placeholder="Vôtre destination" color="primary"></ion-searchbar>
+  <ion-searchbar id="startPointSearch" [debounce]="1000" (ionChange)="handleChange($event)" show-clear-button="always" value="" animated="true" placeholder="Vôtre destination" color="primary"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let result of results">
       <ion-label>{{ result }}</ion-label>
     </ion-item>
   </ion-list>
 
-
-  <ion-searchbar searchIcon="location" show-clear-button="always" value="" animated="true" placeholder="Départ" color="black"></ion-searchbar>
-  <ion-searchbar searchIcon="flag" show-clear-button="always" value="" animated="true" placeholder="Arrivé" color="black"></ion-searchbar>
-
+  <div>
+    <ion-searchbar id="startPoint" searchIcon="location" show-clear-button="always" value="" animated="true" placeholder="Départ" color="black"></ion-searchbar>
+    <ion-searchbar id="endPoint" searchIcon="flag" show-clear-button="always" value="" animated="true" placeholder="Arrivé" color="black"></ion-searchbar>
+  </div>
 
 </ion-content>

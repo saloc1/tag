@@ -19,6 +19,7 @@ interface ApiResponse {
 export class Tab1Page {
   constructor(private http: HttpClient) {}
   public results: string[] = [];
+  public selectedResult: string = '';
 
   handleChange(event: any) {
     if (event.target.value !== "") {
@@ -26,7 +27,7 @@ export class Tab1Page {
       const apiUrl = `https://data.mobilites-m.fr/api/findType/json?types=arret&query=${query}`;
 
       this.http.get<ApiResponse>(apiUrl).subscribe(data => {
-        this.results = data.features.map(feature => feature.properties.LIBELLE);
+        this.results = Array.from(new Set(data.features.map(feature => feature.properties.LIBELLE)));
       });
     } else {
       this.results = [];
