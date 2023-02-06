@@ -1,4 +1,15 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+interface ApiResponse {
+  type: string;
+  features: Array<{
+    type: string;
+    properties: {
+      LIBELLE: string;
+    };
+  }>;
+}
 
 @Component({
   selector: 'app-tab1',
@@ -6,18 +17,20 @@ import { Component } from '@angular/core';
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
-    constructor() {}
-  public data = ['Amsterdam', 'Buenos Aires', 'Cairo', 'Geneva', 'Hong Kong', 'Istanbul', 'London', 'Madrid', 'New York', 'Panama City'];
-  public results = [...this.data];
+  constructor(private http: HttpClient) {}
+  public results: string[] = [];
 
-  handleChange(event:any) {
-    if (event.target.value != "") {
-      const query = event.target.value.toLowerCase();
-      this.results = this.data.filter(d => d.toLowerCase().indexOf(query) > -1);
+  handleChange(event: any) {
+    if (event.target.value !== "") {
+      const query = encodeURIComponent(event.target.value);
+      const apiUrl = `https://data.mobilites-m.fr/api/findType/json?types=arret&query=${query}`;
+
+      this.http.get<ApiResponse>(apiUrl).subscribe(data => {
+        this.results = data.features.map(feature => feature.properties.LIBELLE);
+      });
     } else {
       this.results = [];
     }
   }
-
-
 }
+
