@@ -7,12 +7,16 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-searchbar show-clear-button="always" value="" animated="true" placeholder="Vôtre destination" color="primary"></ion-searchbar>
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">GoumzoMobilité</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)" show-clear-button="always" value="" animated="true" placeholder="Vôtre destination" color="primary"></ion-searchbar>
+  <ion-list>
+    <ion-item *ngFor="let result of results">
+      <ion-label>{{ result }}</ion-label>
+    </ion-item>
+  </ion-list>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+
+  <ion-searchbar searchIcon="location" show-clear-button="always" value="" animated="true" placeholder="Départ" color="black"></ion-searchbar>
+  <ion-searchbar searchIcon="flag" show-clear-button="always" value="" animated="true" placeholder="Arrivé" color="black"></ion-searchbar>
+
+
 </ion-content>
