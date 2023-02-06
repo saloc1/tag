@@ -7,6 +7,7 @@ interface ApiResponse {
     type: string;
     properties: {
       LIBELLE: string;
+      
     };
   }>;
 }
@@ -61,5 +62,10 @@ export class Tab1Page {
   selectStartResult(result: string) {
     this.selectedResult = result;
   }
+
+  debug() {
+    console.log('startPoint: ', this.startPoint);
+    console.log('endPoint: ', this.endPoint);
+    }
 }
 
