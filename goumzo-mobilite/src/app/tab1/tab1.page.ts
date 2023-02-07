@@ -68,9 +68,12 @@ export class Tab1Page {
   }
 
   debug() {
+    const selectedCoordinates = this.coordinates.filter((coordinate, index) => {
+      return this.results[index] === this.endPoint || this.StartResults[index] === this.startPoint;
+    });
     console.log('startPoint: ', this.startPoint);
     console.log('endPoint: ', this.endPoint);
-    console.log('coordinates: ', this.coordinates);
+    console.log('coordinates: ', selectedCoordinates);
     }
 }
 
