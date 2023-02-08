@@ -24,8 +24,16 @@
     <ion-searchbar id="endPoint" searchIcon="flag" show-clear-button="always" [value]="endPoint" animated="true" placeholder="Arrivé" color="black"></ion-searchbar>
   </div>
 
+
+
   <div *ngIf="endPoint && startPoint">
     <ion-button (click)="debug()">Debug</ion-button>
+
+    <ion-fab slot="fixed" horizontal="end" vertical="end">
+      <ion-fab-button>
+        <ion-icon name="star"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </div>
 
 </ion-content>
