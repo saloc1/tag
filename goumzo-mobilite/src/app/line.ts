@@ -6,4 +6,5 @@ export interface Line {
     textColor: string;
     mode: string;
     type: string;
+    polyline: any;
 }

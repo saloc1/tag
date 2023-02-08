@@ -11,6 +11,12 @@ import { Line } from '../line';
 })
 export class Tab3Page {
   map!: L.Map;
+  networks: string = "TRAM,CHRONO,FLEXO,PROXIMO";
+  lines: Line[] = [];
+  displayTram: boolean = true;
+  displayChrono: boolean = true;
+  displayFlexo: boolean = true;
+  displayProximo: boolean = true;
 
   constructor(private api: ApiService) { }
 
@@ -21,7 +27,66 @@ export class Tab3Page {
     }).addTo(this.map);
 
 
-    this.api.getLines("TRAM").subscribe((data:any) => {
+    this.displayLines();
+
+  }
+
+  toggleTram(){
+    this.lines.forEach(element => {
+      if(element.mode == "TRAM"){
+        if(this.displayTram){
+          element.polyline.setStyle({opacity: 0})
+        } else {
+          element.polyline.setStyle({opacity: 100})
+        }
+      }
+    });
+    this.displayTram = !this.displayTram;
+  }
+
+  toggleChrono(){
+    this.lines.forEach(element => {
+      if(element.type == "CHRONO"){
+        if(this.displayChrono){
+          element.polyline.setStyle({opacity: 0})
+        } else {
+          element.polyline.setStyle({opacity: 100})
+        }
+      }
+    });
+    this.displayChrono = !this.displayChrono;
+  }
+
+  toggleProximo(){
+    this.lines.forEach(element => {
+      if(element.type == "PROXIMO"){
+        if(this.displayProximo){
+          element.polyline.setStyle({opacity: 0})
+        } else {
+          element.polyline.setStyle({opacity: 100})
+        }
+      }
+    });
+    this.displayProximo = !this.displayProximo;
+  }
+
+  toggleFlexo(){
+    this.lines.forEach(element => {
+      if(element.type == "FLEXO"){
+        if(this.displayFlexo){
+          element.polyline.setStyle({opacity: 0})
+        } else {
+          element.polyline.setStyle({opacity: 100})
+        }
+      }
+    });
+    this.displayFlexo = !this.displayFlexo;
+  }
+
+
+  
+  displayLines(){
+    this.api.getLines(this.networks).subscribe((data:any) => {
       console.log(data);
       data.forEach((line: Line) => {
 
@@ -32,21 +97,15 @@ export class Tab3Page {
             element.reverse();
           });
 
-          console.log(line.color)
           var polylinePoints = L.polyline(
             data.features[0].geometry.coordinates[0],
             {color: `#${line.color}`}
           ).addTo(this.map);
+          line.polyline = polylinePoints;
+          this.lines.push(line);
+          console.log(line.polyline)
         })
       })
     })
-
-
-
-
-    
-    console.log("ok")
   }
-  
-
 }

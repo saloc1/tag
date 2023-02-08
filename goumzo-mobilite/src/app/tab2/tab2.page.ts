@@ -9,14 +9,34 @@ import { Line } from '../line';
 })
 export class Tab2Page {
 
-  lines: Line[] = [];
+  tramLines: Line[] = [];
+  chronoLines: Line[] = [];
+  flexoLines: Line[] = [];
+  proximoLines: Line[] = [];
 
   ionViewDidEnter(){
+    this.api.getLines("TRAM").subscribe((data:any) => {
+      data.forEach((line: Line) => {
+        this.tramLines.push(line);
+      })
+    })
+
+    this.api.getLines("CHRONO").subscribe((data:any) => {
+      data.forEach((line: Line) => {
+        this.chronoLines.push(line);
+      })
+    })
+
+    this.api.getLines("PROXIMO").subscribe((data:any) => {
+      data.forEach((line: Line) => {
+        this.proximoLines.push(line);
+      })
+    })
+
     this.api.getLines("FLEXO").subscribe((data:any) => {
       data.forEach((line: Line) => {
-        this.lines.push(line);
+        this.flexoLines.push(line);
       })
-      console.log(this.lines)
     })
   }
 

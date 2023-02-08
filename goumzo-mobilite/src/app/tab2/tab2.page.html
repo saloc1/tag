@@ -13,7 +13,12 @@
     </ion-toolbar>
   </ion-header>
 
-  <ul>
-    <li *ngFor="let line of lines" style="background-color: #{{line.color}};">{{line.shortName}}</li>
-  </ul>
+  <p>Tram</p>
+  <ion-chip *ngFor="let line of tramLines" style="background-color: #{{line.color}}; color: #{{line.textColor}}">{{line.shortName}}</ion-chip>
+  <p>Chrono</p>
+  <ion-chip *ngFor="let line of chronoLines" style="background-color: #{{line.color}}; color: #{{line.textColor}}">{{line.shortName}}</ion-chip>
+  <p>Proximo</p>
+  <ion-chip *ngFor="let line of proximoLines" style="background-color: #{{line.color}}; color: #{{line.textColor}}">{{line.shortName}}</ion-chip>
+  <p>Flexo</p>
+  <ion-chip *ngFor="let line of flexoLines" style="background-color: #{{line.color}}; color: #{{line.textColor}}">{{line.shortName}}</ion-chip>
 </ion-content>
