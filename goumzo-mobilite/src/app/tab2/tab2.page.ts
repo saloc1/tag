@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ApiService } from '../api.service';
+import { Line } from '../line';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +9,17 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  lines: Line[] = [];
+
+  ionViewDidEnter(){
+    this.api.getLines("FLEXO").subscribe((data:any) => {
+      data.forEach((line: Line) => {
+        this.lines.push(line);
+      })
+      console.log(this.lines)
+    })
+  }
+
+  constructor(private api: ApiService) {}
 
 }
