@@ -8,6 +8,9 @@ interface ApiResponse {
     properties: {
       LIBELLE: string;
     };
+    geometry: {
+      coordinates: number[][][];
+    };
   }>;
 }
 
@@ -17,20 +20,79 @@ interface ApiResponse {
   styleUrls: ['tab1.page.scss']
 })
 export class Tab1Page {
+  coordinates: { [key: string]: number[][][] } = {};
   constructor(private http: HttpClient) {}
   public results: string[] = [];
+  public StartResults: string[] = [];
+  public selectedResult: string = '';
+  public endPoint: string = '';
+  public startPoint: string = '';
+  public showSearchList: boolean = true;
+  public showStartList: boolean = true;
 
   handleChange(event: any) {
-    if (event.target.value !== "") {
+    if (event.target.value !== '') {
       const query = encodeURIComponent(event.target.value);
       const apiUrl = `https://data.mobilites-m.fr/api/findType/json?types=arret&query=${query}`;
 
       this.http.get<ApiResponse>(apiUrl).subscribe(data => {
-        this.results = data.features.map(feature => feature.properties.LIBELLE);
+        this.results = Array.from(new Set(data.features.map(feature => feature.properties.LIBELLE)));
+        data.features.forEach(feature => {
+          this.coordinates[feature.properties.LIBELLE] = feature.geometry.coordinates;
+        });
       });
     } else {
       this.results = [];
+      this.showSearchList = true;
     }
   }
+
+  handleChangeStart(event: any) {
+    if (event.target.value !== '') {
+      const query = encodeURIComponent(event.target.value);
+      const apiUrl = `https://data.mobilites-m.fr/api/findType/json?types=arret&query=${query}`;
+
+      this.http.get<ApiResponse>(apiUrl).subscribe(data => {
+        this.StartResults = Array.from(new Set(data.features.map(feature => feature.properties.LIBELLE)));
+        data.features.forEach(feature => {
+          this.coordinates[feature.properties.LIBELLE] = feature.geometry.coordinates;
+        });
+      });
+    } else {
+      this.StartResults = [];
+      this.showStartList = true;
+    }
+  }
+
+  selectResult(result: string) {
+    this.selectedResult = result;
+    this.showSearchList = false;
+  }
+
+  selectStartResult(result: string) {
+    this.startPoint = result;
+    this.showStartList = false;
+  }
+
+
+  debug() {
+    let startCoordinates = null;
+    let endCoordinates = null;
+
+    for (let key in this.coordinates) {
+      if (key === this.endPoint) {
+        endCoordinates = this.coordinates[key];
+      }
+      if (key === this.startPoint) {
+        startCoordinates = this.coordinates[key];
+      }
+    }
+
+    console.log('startPoint: ', this.startPoint);
+    console.log('endPoint: ', this.endPoint);
+    console.log('startCoordinates: ', startCoordinates);
+    console.log('endCoordinates: ', endCoordinates);
+  }
+
 }
 

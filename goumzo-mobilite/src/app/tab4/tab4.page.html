@@ -1,17 +1,96 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      GoumzoMobilité
+      GoumzoMobilité - Payements
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 4</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <app-explore-container name="Tab 4 page"></app-explore-container>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Les tickets par SMS</ion-card-title>
+      <ion-card-subtitle>Pour voyager une heure ou un jour : 1 ticket = 1 SMS.</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      Difficile de faire plus facile pour vous déplacer dans la métropole sur les réseaux TAG, cars Région et TER !
+      <br>
+      Envoyez "1H" (1 heure) ou "1J" (1 jour) pour obtenir votre ticket SMS TAG.
+      Montant du ticket sera ajouté à votre facture téléphonique.
+      <br>
+      Enregistrez dès à présent le 93 123 dans votre répertoire !
+      <br>
+      <ion-list>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="1H" src="\assets\img\1H.png" />
+          </ion-thumbnail>
+          <ion-label>1,80 € Envoyez « 1H » au <a href="tel:"> 93 123</a> !</ion-label>
+        </ion-item>
+        <ion-item>
+          <ion-thumbnail slot="start">
+            <img alt="1J" src="\assets\img\1J.png" />
+          </ion-thumbnail>
+          <ion-label>5,80 € Envoyez « 1J » au <a href="tel:"> 93 123</a> !</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-grid>
+    <ion-row>
+      <ion-card color="dark">
+        <ion-card-header>
+          <img alt="relais" src="\assets\img\relais.jpg" />
+          <ion-card-title>Relais TAG</ion-card-title>
+          <ion-card-subtitle><a href="https://www.tag.fr/104-relais-tag.htm">commerçants de la Métropole grenobloise vendent les principaux titres TAG.</a></ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-card color="dark">
+        <ion-card-header>
+          <img alt="distributeur" src="\assets\img\distributeur.png" />
+          <ion-card-title>188 distributeurs automatiques de titres</ion-card-title>
+          <ion-card-subtitle><a href="https://www.tag.fr/104-relais-tag.htm">En stations tramway et aux principaux arrêts Chrono : tickets et rechargement de votre Oùra.</a></ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-card color="dark">
+        <ion-card-header>
+          <img alt="agences" src="\assets\img\agences.png" />
+          <ion-card-title>Agences de Mobilité et Points Services</ion-card-title>
+          <ion-card-subtitle><a href="https://www.tag.fr/104-relais-tag.htm">Vente de titres, conseil en mobilité, info trafic : nos agents vous accueillent.</a></ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ion-row>
+    <ion-row>
+      <ion-card color="dark">
+        <ion-card-header>
+          <img alt="correspondance" src="\assets\img\correspondance.png" />
+          <ion-card-title>Par correspondance</ion-card-title>
+          <ion-card-subtitle><a href="https://www.tag.fr/104-relais-tag.htm">Recevez votre abonnement directement chez vous !</a></ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-card color="dark">
+        <ion-card-header>
+          <img alt="pass" src="\assets\img\pass.jpg" />
+          <ion-card-title>PASS'Mobilités</ion-card-title>
+          <ion-card-subtitle><a href="https://www.tag.fr/104-relais-tag.htm">L'application pour voyager en toute facilité, avec votre smartphone !</a></ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+
+      <ion-card color="dark">
+        <ion-card-header>
+          <img alt="sms" src="\assets\img\sms.jpg" />
+          <ion-card-title>Titre SMS</ion-card-title>
+          <ion-card-subtitle><a href="https://www.tag.fr/104-relais-tag.htm">Achetez votre ticket TAG par SMS !
+            Valable 1 heure, 1 jour ou à plusieurs, sans inscription ni engagement !</a></ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

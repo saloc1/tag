@@ -1,0 +1,22 @@
+ion-card-header.ios {
+  display: flex;
+  flex-flow: column-reverse;
+}
+
+ion-card {
+  --background: #000;
+  --color: #b3b3b3;
+
+}
+
+ion-card-title {
+  --color: #1100ff;
+  text-transform: uppercase;
+}
+
+ion-card-subtitle {
+  --color: #4bc6ff;
+}
+
+
+

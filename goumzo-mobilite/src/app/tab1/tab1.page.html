@@ -7,16 +7,25 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-searchbar [debounce]="1000" (ionChange)="handleChange($event)" show-clear-button="always" value="" animated="true" placeholder="Vôtre destination" color="primary"></ion-searchbar>
-  <ion-list>
-    <ion-item *ngFor="let result of results">
+  <ion-searchbar id="startPointSearch" [debounce]="1000" (ionChange)="handleChange($event)" show-clear-button="always" value="" animated="true" placeholder="Vôtre destination" color="primary"></ion-searchbar>
+  <ion-list *ngIf="showSearchList">
+    <ion-item *ngFor="let result of results" (click)="endPoint = result; showSearchList = false;">
       <ion-label>{{ result }}</ion-label>
     </ion-item>
   </ion-list>
 
+  <div *ngIf="endPoint">
+    <ion-searchbar id="startPoint" [debounce]="1000" (ionChange)="handleChangeStart($event)" searchIcon="location" show-clear-button="always" [value]="startPoint" animated="true" placeholder="Départ" color="black"></ion-searchbar>
+    <ion-list *ngIf="showStartList">
+      <ion-item *ngFor="let result of StartResults" (click)="startPoint = result; showStartList = false;">
+        <ion-label>{{ result }}</ion-label>
+      </ion-item>
+    </ion-list>
+    <ion-searchbar id="endPoint" searchIcon="flag" show-clear-button="always" [value]="endPoint" animated="true" placeholder="Arrivé" color="black"></ion-searchbar>
+  </div>
 
-  <ion-searchbar searchIcon="location" show-clear-button="always" value="" animated="true" placeholder="Départ" color="black"></ion-searchbar>
-  <ion-searchbar searchIcon="flag" show-clear-button="always" value="" animated="true" placeholder="Arrivé" color="black"></ion-searchbar>
-
+  <div *ngIf="endPoint && startPoint">
+    <ion-button (click)="debug()">Debug</ion-button>
+  </div>
 
 </ion-content>
