@@ -13,5 +13,53 @@
     </ion-toolbar>
   </ion-header>
 
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+  <ion-accordion-group>
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        <ion-label>Tram</ion-label>
+      </ion-item>
+      <ion-item class="line" button *ngFor="let line of tramLines" slot="content">
+        <ion-chip slot="start" id="{{line.id}}" (click)="lineDetails($event)" style="background-color: #{{line.color}}; color: #{{line.textColor}}">{{line.shortName}}</ion-chip>  
+        {{line.longName}}
+      </ion-item>>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <ion-accordion-group>
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        <ion-label>Chrono</ion-label>
+      </ion-item>
+      <ion-item class="line" button *ngFor="let line of chronoLines" slot="content">
+        <ion-chip slot="start" id="{{line.id}}" (click)="lineDetails($event)" style="background-color: #{{line.color}}; color: #{{line.textColor}}">{{line.shortName}}</ion-chip>  
+        {{line.longName}}
+      </ion-item>>
+    </ion-accordion>
+  </ion-accordion-group>
+  
+  <ion-accordion-group>
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        <ion-label>Proximo</ion-label>
+      </ion-item>
+      <ion-item class="line" button *ngFor="let line of proximoLines" slot="content">
+        <ion-chip slot="start" id="{{line.id}}" (click)="lineDetails($event)" style="background-color: #{{line.color}}; color: #{{line.textColor}}">{{line.shortName}}</ion-chip>  
+        {{line.longName}}
+      </ion-item>>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <ion-accordion-group>
+    <ion-accordion value="first">
+      <ion-item slot="header" color="light">
+        <ion-label>Flexo</ion-label>
+      </ion-item>
+      <ion-item class="line" button *ngFor="let line of flexoLines" slot="content">
+        <ion-chip slot="start" id="{{line.id}}" (click)="lineDetails($event)" style="background-color: #{{line.color}}; color: #{{line.textColor}}">{{line.shortName}}</ion-chip>  
+        {{line.longName}}
+      </ion-item>>
+    </ion-accordion>
+  </ion-accordion-group>
+
+
 </ion-content>

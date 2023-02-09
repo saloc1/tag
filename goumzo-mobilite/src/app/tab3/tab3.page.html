@@ -12,6 +12,13 @@
       <ion-title size="large">Tab 3</ion-title>
     </ion-toolbar>
   </ion-header>
+  <div id="map"></div>
+  <div id="toggles">
+    <ion-chip (click)="toggleTram()">TRAM</ion-chip>
+    <ion-chip (click)="toggleChrono()">CHRONO</ion-chip>
+    <ion-chip (click)="toggleProximo()">PROXIMO</ion-chip>
+    <ion-chip (click)="toggleFlexo()">FLEXO</ion-chip>
+  </div>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+
 </ion-content>
