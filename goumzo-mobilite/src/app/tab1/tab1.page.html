@@ -21,7 +21,12 @@
         <ion-label>{{ result }}</ion-label>
       </ion-item>
     </ion-list>
-    <ion-searchbar id="endPoint" searchIcon="flag" show-clear-button="always" [value]="endPoint" animated="true" placeholder="Arrivé" color="black"></ion-searchbar>
+    <ion-searchbar id="endPoint" [debounce]="1000" (ionChange)="handleChangeStart($event)" searchIcon="flag" show-clear-button="always" [value]="endPoint" animated="true" placeholder="Arrivé" color="black"></ion-searchbar>
+    <ion-list *ngIf="showEndList">
+      <ion-item *ngFor="let result of results" (click)="endPoint = result; showEndList = false;">
+        <ion-label>{{ result }}</ion-label>
+      </ion-item>
+    </ion-list>
   </div>
 
 
@@ -30,10 +35,14 @@
     <ion-button (click)="debug()">Debug</ion-button>
 
     <ion-fab slot="fixed" horizontal="end" vertical="end">
-      <ion-fab-button>
+      <ion-fab-button (click)="addToFavorites()">
         <ion-icon name="star"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </div>
+
+  <ion-select [(ngModel)]="selectedFavorites" (ionChange)="setSelectedFavorites()">
+    <ion-select-option *ngFor="let favorite of favorites" [value]="favorite">{{ favorite.startPoint }} - {{ favorite.endPoint }}</ion-select-option>
+  </ion-select>
 
 </ion-content>

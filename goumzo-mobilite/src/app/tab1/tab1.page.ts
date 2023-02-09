@@ -21,13 +21,26 @@ interface ApiResponse {
 })
 export class Tab1Page {
   coordinates: { [key: string]: number[][][] } = {};
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+
+    const favoritesFromStorage = localStorage.getItem('favorites');
+    try {
+      this.favorites = favoritesFromStorage ? JSON.parse(favoritesFromStorage) : [];
+    } catch (error) {
+      console.error(error);
+      this.favorites = [];
+    }
+
+  }
   public results: string[] = [];
   public StartResults: string[] = [];
+  public favorites: any[] = [];
+  public selectedFavorites: string[] = [];
   public selectedResult: string = '';
   public endPoint: string = '';
   public startPoint: string = '';
   public showSearchList: boolean = true;
+  public showEndList: boolean = true;
   public showStartList: boolean = true;
 
   handleChange(event: any) {
@@ -44,6 +57,7 @@ export class Tab1Page {
     } else {
       this.results = [];
       this.showSearchList = true;
+      this.showEndList = true;
     }
   }
 
@@ -61,17 +75,20 @@ export class Tab1Page {
     } else {
       this.StartResults = [];
       this.showStartList = true;
+      this.showEndList = true;
     }
   }
 
   selectResult(result: string) {
     this.selectedResult = result;
     this.showSearchList = false;
+    this.showEndList = false;
   }
 
   selectStartResult(result: string) {
     this.startPoint = result;
     this.showStartList = false;
+    this.showEndList = false;
   }
 
 
@@ -94,5 +111,32 @@ export class Tab1Page {
     console.log('endCoordinates: ', endCoordinates);
   }
 
-}
+  addToFavorites() {
+    const existing = this.favorites.filter(f => f.startPoint === this.startPoint && f.endPoint === this.endPoint);
+    if (existing.length === 0) {
+      this.favorites.push({
+        startPoint: this.startPoint,
+        endPoint: this.endPoint
+      });
+      localStorage.setItem('favorites', JSON.stringify(this.favorites));
+    }
+  }
 
+  removeFromFavorites(favorite: string) {
+    const index = this.favorites.indexOf(favorite);
+    if (index !== -1) {
+      this.favorites.splice(index, 1);
+      localStorage.setItem('favorites', JSON.stringify(this.favorites));
+    }
+  }
+
+  setSelectedFavorites() {
+    localStorage.setItem('favorites', JSON.stringify(this.selectedFavorites));
+  }
+
+  displayFavorites() {
+    let favorites = localStorage.getItem('favorites');
+    this.selectedFavorites = favorites ? JSON.parse(favorites) : [];
+  }
+
+}
