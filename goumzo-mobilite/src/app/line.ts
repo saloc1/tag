@@ -1,3 +1,6 @@
+import { Cluster } from "./cluster";
+import { Stop } from "./stop";
+
 export interface Line {
     id: string;
     shortName: string;
@@ -7,4 +10,6 @@ export interface Line {
     mode: string;
     type: string;
     polyline: any;
+    stops: Stop[];
+    clusters: Cluster[];
 }

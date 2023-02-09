@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ligne</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <p>{{lineId}}</p>
+
+  <ion-accordion-group>
+    <ion-accordion *ngFor="let cluster of clusters" value="{{cluster.name}}">
+      <ion-item slot="header" color="light">
+        <ion-label>{{cluster.name}}</ion-label>
+      </ion-item>
+      <div class="ion-padding" slot="content">
+        <!-- <p>{{cluster.stopTimes[0].pattern.lastStopName}}</p> -->
+        <div *ngFor="let stopTime of cluster.stopTimes">
+          <div>Direction {{stopTime.pattern.lastStopName}}</div>
+          <div>
+            <ion-chip *ngFor="let time of stopTime.times">
+              {{time.formattedTime}}
+            </ion-chip>
+          </div>
+          
+        </div>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+</ion-content>

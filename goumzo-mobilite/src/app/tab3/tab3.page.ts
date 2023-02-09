@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { Cluster } from '../cluster';
 import * as L from 'leaflet';
 import { ApiService } from '../api.service';
 import { Line } from '../line';
+import { Stop } from '../stop';
 
 
 @Component({
@@ -102,9 +104,20 @@ export class Tab3Page {
             {color: `#${line.color}`}
           ).addTo(this.map);
           line.polyline = polylinePoints;
-          this.lines.push(line);
           console.log(line.polyline)
         })
+        if(line.mode == "TRAM"){
+          this.api.getClusters(line.id).subscribe((data:any) => {
+            line.clusters = data;
+            line.clusters.forEach((cluster: Cluster) => {
+              L.marker([cluster.lat, cluster.lon]).addTo(this.map);
+          })
+            console.log(line.stops);
+          })
+        }
+
+
+        this.lines.push(line);
       })
     })
   }
